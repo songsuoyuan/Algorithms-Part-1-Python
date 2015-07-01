@@ -1,5 +1,12 @@
-# Stack implementation with resizing arrays
+# Stack implementation with resizing arrays (iterable)
 # Double when stack is full, halve when stack is one-quarter full
+#
+# Methods:
+# boolean   isEmpty()
+# int       count()
+# None      push()
+# item      pop()
+# item      top()
 #
 # Test example:
 # user$ more tobe.txt
@@ -48,6 +55,12 @@ class arrayStack:
         if self._N > 0 and self._N == len(self._a) / 4:
             self._resize(len(self._a) / 2)
         return item
+
+    # return the top item in stack
+    def top(self):
+        if self.isEmpty():
+            raise IndexError('Stack underflow.')
+        return self._a[self._N - 1]
 
 if __name__ == '__main__':
     import sys

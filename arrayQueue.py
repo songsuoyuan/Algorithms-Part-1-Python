@@ -9,15 +9,22 @@
 
 class arrayQueue:
     # initialize an empty queue with fixed size 2
-    def __init__(self, N):
+    def __init__(self):
         self._a = [None, None]
         self._N = 0
         self._first = 0
         self._last = 0
 
-    def __iter__()
+    # implement class iterable
+    def __iter__(self):
+        if self._last >= self._first:
+            return iter(self._a[self._first:self._last + 1])
+        else:
+            return iter(self._a[self._first:] + 
+                        self._a[:self._last + 1])
 
     # is queue empty?
     def isEmpty(self):
         return self_N == 0
 
+    
