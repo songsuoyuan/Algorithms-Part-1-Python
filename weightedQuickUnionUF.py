@@ -9,16 +9,16 @@ class weightedQuickUnionUF:
     # initialize an empty quick union class with N components
     # from 0 to N-1
     def __init__(self, N):
-        self.N = N
-        self.count = N
-        self.parent = [i for i in xrange(N)]
-        self.size = [1 for i in xrange(N)]
+        self._N = N
+        self._count = N
+        self._parent = [i for i in xrange(N)]
+        self._size = [1 for i in xrange(N)]
 
     def components(self):
         """
         @return the number of components
         """
-        return self.count
+        return self._count
 
     def findRoot(self, p):
         """
@@ -26,16 +26,16 @@ class weightedQuickUnionUF:
         @param p the integer representing one site
         @return the root of this component
         """
-        assert p >=0 and p < self.N
+        assert p >=0 and p < self._N
         rootP = p
         # find root
-        while rootP != self.parent[rootP]:
-            rootP = self.parent[rootP]
+        while rootP != self._parent[rootP]:
+            rootP = self._parent[rootP]
         # path compression
-        while p != self.parent[p]:
+        while p != self._parent[p]:
             pSave = p
-            p = self.parent[p]
-            self.parent[pSave] = rootP
+            p = self._parent[p]
+            self._parent[pSave] = rootP
         return p
 
     def isConnected(self, p, q):
@@ -56,13 +56,13 @@ class weightedQuickUnionUF:
         """
         rootP = self.findRoot(p)
         rootQ = self.findRoot(q)
-        if self.size[rootP] < self.size[rootQ]:
-            self.parent[rootP] = rootQ
-            self.size[rootQ] += self.size[rootP]
+        if self._size[rootP] < self._size[rootQ]:
+            self._parent[rootP] = rootQ
+            self._size[rootQ] += self._size[rootP]
         else:
-            self.parent[rootQ] = rootP
-            self.size[rootP] += self.size[rootQ]
-        self.count -= 1
+            self._parent[rootQ] = rootP
+            self._size[rootP] += self._size[rootQ]
+        self._count -= 1
 
 if __name__ == '__main__':
     import sys
