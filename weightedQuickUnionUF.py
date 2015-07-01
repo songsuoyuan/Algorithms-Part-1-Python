@@ -71,7 +71,7 @@ if __name__ == '__main__':
         baseDir = os.path.join('Data')
         fileNane = os.path.join(baseDir, sys.argv[1])
         if os.path.isfile(fileNane):
-            f = open(fileNane)
+            f = open(fileNane, 'r')
             N = int(f.readline())
             uf = weightedQuickUnionUF(N)
             for line in f.readlines():
