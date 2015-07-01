@@ -1,5 +1,9 @@
 # Weighted quick-union (with path compression)
 # Support union and find operations in log(N) time.
+# 
+# Test example:
+# user$ python weightedQuickUnionUF.py tinyUF.txt
+# 2 components
 
 class weightedQuickUnionUF:
     # initialize an empty quick union class with N components
@@ -10,11 +14,11 @@ class weightedQuickUnionUF:
         self.parent = [i for i in xrange(N)]
         self.size = [1 for i in xrange(N)]
 
-    def count(self):
+    def components(self):
         """
         @return the number of components
         """
-        return count;
+        return self.count
 
     def findRoot(self, p):
         """
@@ -22,7 +26,7 @@ class weightedQuickUnionUF:
         @param p the integer representing one site
         @return the root of this component
         """
-        assert p >=0 and p < self.count
+        assert p >=0 and p < self.N
         rootP = p
         # find root
         while rootP != self.parent[rootP]:
@@ -58,14 +62,27 @@ class weightedQuickUnionUF:
         else:
             self.parent[rootQ] = rootP
             self.size[rootP] += self.size[rootQ]
-        self.count -=1
+        self.count -= 1
 
 if __name__ == '__main__':
-    uf = weightedQuickUnionUF(13)
-    uf.parent = [0, 0, 0, 1, 1, 1, 3, 3, 6, 6, 8, 9, 9]
-    print('id:')
-    print(uf.parent)
-    print('Are site 8 and site 9 connected?')
-    print(uf.isConnected(8,9))
-    print('Now id becomes:')
-    print(uf.parent)
+    import sys
+    import os.path
+    if len(sys.argv) > 1:
+        baseDir = os.path.join('Data')
+        fileNane = os.path.join(baseDir, sys.argv[1])
+        if os.path.isfile(fileNane):
+            f = open(fileNane)
+            N = int(f.readline())
+            uf = weightedQuickUnionUF(N)
+            for line in f.readlines():
+                x, y = [int(t) for t in line[:-1].split(' ')]
+                if uf.isConnected(x, y):
+                    continue
+                uf.union(x, y)
+            print uf.components(), 'components'
+        else:
+            print 'File not exists, possible solution:' 
+            print 'Use python weightedQuickUnionUF.py tinyUF.txt '\
+                'instead of \\Data\\tinyUF.txt'
+    else:
+        print 'No file name given, program exit.'
