@@ -21,6 +21,10 @@ class arrayStack:
     def isEmpty(self):
         return self._N == 0
 
+    # return stack size
+    def count(self):
+        return self._N
+
     # resize the list while hoding the elements
     def _resize(self, cap):
         temp = cap * [None]
@@ -63,6 +67,9 @@ if __name__ == '__main__':
                     sys.exit('Bad Input in ' + fileNane)
                 else:
                     print stack.pop(),
+            print '\n', stack.count(), 'left in stack:'
+            for item in stack:
+                print item,
         else:
             print 'File not exists, possible solution:' 
             print 'Use python arrayStack.py tobe.txt '\
