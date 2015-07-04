@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
 # Stack implementation with resizing arrays (iterable)
 # Double when stack is full, halve when stack is one-quarter full
 #
