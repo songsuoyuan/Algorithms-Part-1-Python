@@ -56,6 +56,8 @@ class weightedQuickUnionUF:
         """
         rootP = self.findRoot(p)
         rootQ = self.findRoot(q)
+        if rootP == rootQ:
+            return 
         if self._size[rootP] < self._size[rootQ]:
             self._parent[rootP] = rootQ
             self._size[rootQ] += self._size[rootP]
